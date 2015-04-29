@@ -127,5 +127,12 @@ namespace WkHtmlToXSharp
 
 			_converter = null;
 		}
+
+
+        //~MultiplexingConverter()
+        //{
+        //    Dispose();
+        //}
+		
 	}
 }

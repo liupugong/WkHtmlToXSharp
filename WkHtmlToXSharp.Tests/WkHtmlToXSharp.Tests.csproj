@@ -11,7 +11,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WkHtmlToXSharp.Tests</RootNamespace>
     <AssemblyName>WkHtmlToXSharp.Tests</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -35,6 +35,14 @@
     <TargetFrameworkProfile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -126,6 +134,10 @@
       <Project>{eff2501d-d316-40a9-9362-9f771fb6ca98}</Project>
       <Name>WkHtmlToXSharp.Win32</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WkHtmlToXSharp.Win64\WkHtmlToXSharp.Win64.csproj">
+      <Project>{811C3340-4E30-498B-BC67-8EEAB18DE477}</Project>
+      <Name>WkHtmlToXSharp.Win64</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WkHtmlToXSharp\WkHtmlToXSharp.csproj">
       <Project>{3DADECBF-6D08-4090-9A1D-2064D0466381}</Project>
       <Name>WkHtmlToXSharp</Name>
@@ -158,6 +170,9 @@
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Resources\page.xhtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

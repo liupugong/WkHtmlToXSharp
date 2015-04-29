@@ -29,6 +29,7 @@ namespace WkHtmlToXSharp.Tests
 				WkHtmlToXLibrariesManager.Register(new Linux32NativeBundle());
 				WkHtmlToXLibrariesManager.Register(new Linux64NativeBundle());
 				WkHtmlToXLibrariesManager.Register(new Win32NativeBundle());
+                WkHtmlToXLibrariesManager.Register(new Win64NativeBundle());
 			}
 		}
 

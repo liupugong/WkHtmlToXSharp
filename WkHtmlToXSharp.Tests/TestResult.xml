@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="D:\Works\GIT\WkHtmlToXSharp\WkHtmlToXSharp.Tests\WkHtmlToXSharp.Tests.csproj" total="4" errors="1" failures="1" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2014-11-04" time="09:37:31">
+  <environment nunit-version="2.6.3.13283" clr-version="2.0.50727.5485" os-version="Microsoft Windows NT 6.1.7601 Service Pack 1" platform="Win32NT" cwd="C:\Program Files (x86)\NUnit 2.6.3\bin" machine-name="DST56169" user="liupg" user-domain="CN1" />
+  <culture-info current-culture="zh-CN" current-uiculture="zh-CN" />
+  <test-suite type="Project" name="D:\Works\GIT\WkHtmlToXSharp\WkHtmlToXSharp.Tests\WkHtmlToXSharp.Tests.csproj" executed="True" result="Failure" success="False" time="476.118" asserts="0">
+    <results>
+      <test-suite type="Assembly" name="D:\Works\GIT\WkHtmlToXSharp\WkHtmlToXSharp.Tests\bin\Debug\WkHtmlToXSharp.Tests.dll" executed="True" result="Failure" success="False" time="476.098" asserts="0">
+        <results>
+          <test-suite type="Namespace" name="WkHtmlToXSharp" executed="True" result="Failure" success="False" time="476.098" asserts="0">
+            <results>
+              <test-suite type="Namespace" name="Tests" executed="True" result="Failure" success="False" time="476.098" asserts="0">
+                <results>
+                  <test-suite type="TestFixture" name="PdfConverterTest" executed="True" result="Failure" success="False" time="476.097" asserts="0">
+                    <results>
+                      <test-case name="WkHtmlToXSharp.Tests.PdfConverterTest.CanConvertConcurrently" executed="True" result="Failure" success="False" time="50.059" asserts="0">
+                        <properties>
+                          <property name="Timeout" value="50000" />
+                          <property name="RequiresThread" value="True" />
+                          <property name="APARTMENT_STATE" value="MTA" />
+                        </properties>
+                        <failure>
+                          <message><![CDATA[Test exceeded Timeout value of 50000ms]]></message>
+                          <stack-trace />
+                        </failure>
+                      </test-case>
+                      <test-case name="WkHtmlToXSharp.Tests.PdfConverterTest.CanConvertFromFile" executed="True" result="Error" success="False" time="376.641" asserts="8">
+                        <failure>
+                          <message><![CDATA[System.IO.DirectoryNotFoundException : 未能找到路径“c:\temp\tmp8.pdf”的一部分。]]></message>
+                          <stack-trace><![CDATA[在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+在 System.IO.File.WriteAllBytes(String path, Byte[] bytes)
+在 WkHtmlToXSharp.Tests.PdfConverterTest._SimpleConversion() 位置 D:\Works\GIT\WkHtmlToXSharp\WkHtmlToXSharp.Tests\PdfConverterTests.cs:行号 93
+在 WkHtmlToXSharp.Tests.PdfConverterTest.CanConvertFromFile() 位置 D:\Works\GIT\WkHtmlToXSharp\WkHtmlToXSharp.Tests\PdfConverterTests.cs:行号 100
+]]></stack-trace>
+                        </failure>
+                      </test-case>
+                      <test-case name="WkHtmlToXSharp.Tests.PdfConverterTest.CanHandleAuthFailure" executed="True" result="Success" success="True" time="0.882" asserts="2" />
+                      <test-case name="WkHtmlToXSharp.Tests.PdfConverterTest.ConvertFromString" executed="True" result="Success" success="True" time="46.994" asserts="1" />
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>

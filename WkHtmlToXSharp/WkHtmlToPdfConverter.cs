@@ -167,11 +167,16 @@ namespace WkHtmlToXSharp
 		{
 			var tmp = GetStringValue(value);
 
-			if (NativeCalls.wkhtmltopdf_set_object_setting(settings, name, tmp) == 0)
-			{
-				var msg = string.Format("Set ObjectSetting '{0}' as '{1}': operation failed!", name, tmp);
-				throw new ApplicationException(msg);
-			}
+            try
+            {
+                if (NativeCalls.wkhtmltopdf_set_object_setting(settings, name, tmp) == 0)
+                {
+                    var msg = string.Format("Set ObjectSetting '{0}' as '{1}': operation failed!", name, tmp);
+                    throw new ApplicationException(msg);
+                }
+            }
+            catch { throw; }
+
 		}
 
 		private IntPtr _BuildObjectsettings()
@@ -283,44 +288,58 @@ namespace WkHtmlToXSharp
 			var progressCb = new NativeCalls.wkhtmltopdf_int_callback(OnProgressChanged);
 			var finishCb = new NativeCalls.wkhtmltopdf_bool_callback(OnFinished);
 
-			try
-			{
-				var gSettings = _BuildGlobalSettings();
-				var oSettings = _BuildObjectsettings();
+            try
+            {
+                var gSettings = _BuildGlobalSettings();
+                var oSettings = _BuildObjectsettings();
 
-				converter = _BuildConverter(gSettings, oSettings, inputHtml);
+                converter = _BuildConverter(gSettings, oSettings, inputHtml);
 
-				_errorString = new StringBuilder();
+                _errorString = new StringBuilder();
 
-				NativeCalls.wkhtmltopdf_set_error_callback(converter, errorCb);
-				NativeCalls.wkhtmltopdf_set_warning_callback(converter, warnCb);
-				NativeCalls.wkhtmltopdf_set_phase_changed_callback(converter, phaseCb);
-				NativeCalls.wkhtmltopdf_set_progress_changed_callback(converter, progressCb);
-				NativeCalls.wkhtmltopdf_set_finished_callback(converter, finishCb);
+                NativeCalls.wkhtmltopdf_set_error_callback(converter, errorCb);
+                NativeCalls.wkhtmltopdf_set_warning_callback(converter, warnCb);
+                NativeCalls.wkhtmltopdf_set_phase_changed_callback(converter, phaseCb);
+                NativeCalls.wkhtmltopdf_set_progress_changed_callback(converter, progressCb);
+                NativeCalls.wkhtmltopdf_set_finished_callback(converter, finishCb);
 
-				OnBegin(NativeCalls.wkhtmltopdf_phase_count(converter));
+                OnBegin(NativeCalls.wkhtmltopdf_phase_count(converter));
 
-				if (NativeCalls.wkhtmltopdf_convert(converter) == 0)
-				{
-					var msg = string.Format("HtmlToPdf conversion failed: {0}", _errorString.ToString());
-					throw new ConverterException(msg);
-				}
+                if (NativeCalls.wkhtmltopdf_convert(converter) == 0)
+                {
+                    var msg = string.Format("HtmlToPdf conversion failed: {0}", _errorString.ToString());
+                    throw new ConverterException(msg);
+                }
 
-				if (!string.IsNullOrEmpty(GlobalSettings.Out))
-					return null;
+                if (!string.IsNullOrEmpty(GlobalSettings.Out))
+                    return null;
 
-				_Log.Debug("CONVERSION DONE.. getting output.");
+                _Log.Debug("CONVERSION DONE.. getting output.");
 
-				// Get output from internal buffer..
+                // Get output from internal buffer..
 
-				IntPtr tmp = IntPtr.Zero;
-				var ret = NativeCalls.wkhtmltopdf_get_output(converter, out tmp);
-				var output = new byte[ret.ToInt32()];
-				Marshal.Copy(tmp, output, 0, output.Length);
+                IntPtr tmp = IntPtr.Zero;
+                var ret = NativeCalls.wkhtmltopdf_get_output(converter, out tmp);
+                var output = new byte[ret.ToInt32()];
+                Marshal.Copy(tmp, output, 0, output.Length);
 
-				return output;
-			}
-			finally
+                return output;
+            }
+            catch
+            {
+                // Dispose un-managed resources..
+                try
+                {
+                    NativeCalls.wkhtmltopdf_deinit();
+                }
+                catch (DllNotFoundException)
+                {
+                    // We may not be initialized yet
+                }
+                throw;
+                
+            }
+            finally
 			{
 				if (converter != IntPtr.Zero)
 				{
